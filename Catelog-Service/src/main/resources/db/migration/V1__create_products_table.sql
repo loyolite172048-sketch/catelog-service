@@ -1,11 +1,14 @@
-CREATE SEQUENCE product_id_seq START WITH 1 INCREMENT BY 50;
+
 
 CREATE TABLE products (
-  id BIGINT DEFAULT NEXT VALUE FOR product_id_seq NOT NULL,
-  code VARCHAR(50) NOT NULL UNIQUE,
-  name VARCHAR(255) NOT NULL,
-  description TEXT,
-  image_url TEXT,
-  price DECIMAL(10,2) NOT NULL,
-  PRIMARY KEY (id)
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(255) NOT NULL UNIQUE,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    image_url TEXT,
+    price DECIMAL(10,2) NOT NULL
 );
+
+
+
+ALTER TABLE products AUTO_INCREMENT = 50;

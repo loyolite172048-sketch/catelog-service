@@ -1,7 +1,9 @@
 package com.BookStore.Catelog.service;
 
 import com.BookStore.Catelog.entity.PagedResult;
+import com.BookStore.Catelog.entity.Product;
 import com.BookStore.Catelog.entity.ProductEntity;
+import com.BookStore.Catelog.entity.ProductMapper;
 import com.BookStore.Catelog.repository.ProductRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +26,12 @@ public class ProductService {
         this.repo = repo;
     }
 
-    public PagedResult<ProductEntity> getProducts(int pageNo){
+    public PagedResult<Product> getProducts(int pageNo){
         Sort sort = Sort.by("name").ascending();
         pageNo = pageNo <= 1 ? 0 : pageNo -1;
         Pageable page  = PageRequest.of(pageNo, 10, sort);
-        Page<ProductEntity> productPage = repo.findAll(page);
+        Page<Product> productPage =
+                repo.findAll(page).map(ProductMapper::toProduct);
 
         return new PagedResult<>(
                 productPage.getContent(),

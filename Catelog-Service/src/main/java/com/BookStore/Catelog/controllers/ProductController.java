@@ -1,6 +1,7 @@
 package com.BookStore.Catelog.controllers;
 
 import com.BookStore.Catelog.entity.PagedResult;
+import com.BookStore.Catelog.entity.Product;
 import com.BookStore.Catelog.entity.ProductEntity;
 import com.BookStore.Catelog.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/Products")
-public class ProductController {
+class ProductController {
 
     private final ProductService service;
 
@@ -20,7 +21,7 @@ public class ProductController {
         this.service = service;
     }
 
-    public PagedResult<ProductEntity> getProducts(@RequestParam(name = "page", defaultValue="1") int pageNo){
+    public PagedResult<Product> getProducts(@RequestParam(name = "page", defaultValue="1") int pageNo){
         return service.getProducts(pageNo);
     }
 }
